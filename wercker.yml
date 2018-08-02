@@ -1,0 +1,52 @@
+box: maven:3.5.2-jdk-8
+no-response-timeout: 25
+command-timeout: 60
+build:
+  steps:
+    - wercker/maven:
+        goals: install
+        settings: wercker-settings.xml
+        cache_repo: true
+
+    - script:
+        name: print version
+        code: |-
+             echo "=================================================================================================================================="
+             echo "  VERSION: ${APP_VERSION}  OK"
+             echo "=================================================================================================================================="
+
+release:
+  steps:
+    - script:
+        name: reset commit
+        code: |
+             git reset --hard $WERCKER_GIT_COMMIT
+
+    - avon/fetch-git-tags
+
+    - avon/version-from-git-tag
+
+    - script:
+        name: check consitency
+        code: |-
+             if [[ $GIT_DIRTY == true ]] ; then
+                echo "Git is dirty, canot release"
+                exit 1
+             fi
+             if [[ $MAKE_RELEASE != true ]] ; then
+                echo "Only release version can be deployed"
+                exit 1
+             fi
+
+    - wercker/maven:
+        goals: deploy
+        skiptests: true
+        settings: wercker-settings.xml
+        cache_repo: true
+
+    - script:
+        name: print version
+        code: |-
+             echo "=================================================================================================================================="
+             echo "  RELEASE VERSION: ${APP_VERSION}  OK"
+             echo "=================================================================================================================================="

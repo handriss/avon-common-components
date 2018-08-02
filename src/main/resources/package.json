@@ -12,11 +12,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "copyfiles": "^2.0.0",
-    "tsc-watch": "^1.0.26",
-    "typescript": "^3.0.1"
+    "copyfiles": "2.0.0",
+    "tsc-watch": "1.0.26",
+    "typescript": "3.0.1"
   },
   "dependencies": {
-    "@types/angular": "^1.6.49"
+    "@types/angular": "1.6.49"
   }
 }

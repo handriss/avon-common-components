@@ -7,12 +7,14 @@
     "build": "npm run -s compile_tsc & npm run -s copy_html_and_css",
     "compile_tsc": "node_modules/.bin/tsc",
     "copy_html_and_css": "copyfiles --up 1 src/**/*.html src/**/*.css dist/",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jasmine"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/jasmine": "^2.8.8",
     "copyfiles": "2.0.0",
+    "jasmine": "^3.1.0",
     "tsc-watch": "1.0.26",
     "typescript": "3.0.1"
   },

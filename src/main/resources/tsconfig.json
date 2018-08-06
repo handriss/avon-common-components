@@ -1,8 +1,7 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
     "target": "es5",
-    "outDir": "dist/",
+    "outFile": "dist/bundle.js",
     "rootDir": "src/",
     "noEmitOnError": true
   }
